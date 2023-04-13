@@ -1,0 +1,6 @@
+Nombre Ubicacion ListaAerolíneas ListaVuelos
+Aeropuerto1 Buenos-Aires 
+
+Usuario Contraseña
+
+NroVuelo Origen Destino 
