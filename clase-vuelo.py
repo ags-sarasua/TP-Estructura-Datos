@@ -18,9 +18,11 @@ class vuelo:
     #precio: int mayor a 0
     
     @staticmethod
-    def check_inputs(nro_vuelo,precio):
+    def check_inputs_vuelo(nro_vuelo,precio):
         while len(nro_vuelo)!=4 or not nro_vuelo.isnumeric():
             nro_vuelo = input("Error, debe ingresar un número de 4 dígitos: ")
+        while precio < 0 or not precio.isnumeric():
+            precio = input("El precio tiene que ser un número positivo")
     def check_piloto(legajo_piloto,matriz_empleado):
         """while legajo_piloto not in matriz_empleado[:][-2] and matriz_empleado[:][-1] != "Piloto":
             matriz = input("Error, este piloto no existe. Intente de nuevo.")"""        
@@ -45,5 +47,4 @@ class viaje:
     def check_avion(nro_serie,matriz_avion):        
         while nro_serie not in matriz_avion[:][0]:
             nro_vuelo = input("Error, el avión no existe. Intente de nuevo.")            
-    
-  
+
