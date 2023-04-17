@@ -75,7 +75,24 @@ class vuelo:
     #aeropuerto salida/llegada: que sea un string
     #nro_avion: que sea un objeto de la clase avion
     #piloto: que el legajo pertenezca a un empleado del sector piloto
-    #precio: int mayor a 0    
+    #precio: int mayor a 0  
+  
+    @staticmethod
+    def check_inputs_vuelo(nro_vuelo,precio):
+        while len(nro_vuelo)!=4 or not nro_vuelo.isnumeric():
+            nro_vuelo = input("Error, debe ingresar un número de 4 dígitos: ")
+        while precio < 0 or not precio.isnumeric():
+            precio = input("El precio tiene que ser un número positivo")
+    def check_piloto(legajo_piloto,matriz_empleado):
+        """while legajo_piloto not in matriz_empleado[:][-2] and matriz_empleado[:][-1] != "Piloto":
+            matriz = input("Error, este piloto no existe. Intente de nuevo.")"""        
+        chequear == False
+        while (not chequear):
+            for i in matriz_empleado:
+                if i[-2] == legajo_piloto:
+                    if i[-1] == "Piloto":
+                        chequear = True
+            legajo_piloto = input("Error, no es un piloto")
     
         
 class viaje:
@@ -89,6 +106,14 @@ class viaje:
     #nro_vuelo: exista en vuelo
     #nro_serie: exista en avion
     #fecha:fecha 
+
+    @staticmethod
+    def check_vuelo(nro_vuelo,matriz_vuelo):
+        while nro_vuelo not in matriz_vuelo[:][0]:
+            nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo.")
+    def check_avion(nro_serie,matriz_avion):        
+        while nro_serie not in matriz_avion[:][0]:
+            nro_vuelo = input("Error, el avión no existe. Intente de nuevo.")  
 
 class reserva:
     def __init__(self,nro_factura,DNI_cliente:persona,empleado:empleado,nro_viaje:viaje,monto):
