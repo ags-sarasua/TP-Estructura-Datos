@@ -13,8 +13,25 @@ def validarNum(tipoDato):
         ingresado = input("Proba de vuelta: ")
     return ingresado
 
-
 DNI = validarNum("DNI")
 
 print("Este es:", DNI)
 
+import datetime
+
+def validarNum(tipoDato, min, max):
+    ingresado = min - 1
+    booleana = False
+    while(booleana == False or ingresado < min or ingresado > max):
+        try:
+            ingresado = int(input("Ingrese "+ tipoDato +": "))
+            booleana = True    
+        except:
+            print("Fecha invalida")       
+    return ingresado
+
+año = validarNum("año", 1900, 2030)
+mes = validarNum("mes", 1, 12)
+dia = validarNum("dia", 1, 31)
+
+print(datetime.date(año, mes, dia))
