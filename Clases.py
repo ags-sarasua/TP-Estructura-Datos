@@ -13,7 +13,15 @@ class persona:
         self.sexo=sexo
         self.fecha_de_nacimiento=fecha_de_nacimiento
         self.pais=pais
-        
+
+    def ActualizarPersona(DNI, PorCual, indice, matriz_persona):
+        for i in matriz_persona:
+            if i[0] == DNI and (indice-1) < len(i):
+                i[indice-1] = PorCual
+        return matriz_persona
+
+
+
     #chequear DNI: que sea un numero y que sea de 8 digitos
     #chequear nombre: que sea un string
     #chequear sexo: Femenino, Masculino, Otro
@@ -26,6 +34,22 @@ class empleado(persona):
         self.legajo=legajo
         self.sector=sector
     
+
+    def eliminarEmpleado(DNI,matriz_empleado):
+        for i in matriz_empleado:
+            if i[0]==DNI:
+                matriz_empleado.pop(i)
+        return matriz_empleado
+
+    def ActualizarEmpleado(DNI, PorCual, indice, matriz_empleado):
+        for i in matriz_empleado:
+            if i[0] == DNI and (indice-1) < len(i):
+                i[indice-1] = PorCual
+        return matriz_empleado
+
+
+
+
     #chequear legajo: que sea un numero y de 4 digitos (y que no hay dos repetidos)
     #chequear sector: que sea un sector preexistente
 
@@ -48,17 +72,19 @@ class avion:
             nro_vuelos_actuales=input('Ingrese nuevamente el nro de vuelos actuales:    ')
         return nro_vuelos_actuales
     @staticmethod
-    def check_fecha_alta(estado):    
-        while(estado is not 'Servicio' and estado is not 'Fuera de servicio'):
+    def check_estado(estado):    
+        while(estado is not 'En servicio' and estado is not 'Fuera de servicio'):
             estado=input('Ingrese nuevamente el estado del avion:    ')
         return estado
         
-        #nro_serie: int
-        #nro_serie: int 10 digitos
-        #modelo: string
-        #fecha_alta: fecha
-        #nro_vuelos_actuales: 0 o 1
-        #estado: Servicio, Fuera de servicio
+
+    def eliminarAvion(nro_serie,matriz_aviones):
+        for i in matriz_aviones:
+            if i[0]==nro_serie:
+                matriz_aviones.pop(i)
+        return matriz_aviones
+
+
 
 class vuelo:
     def __init__(self,nro_vuelo,hora,aeropuerto_salida,aeropuerto_llegada,nro_serie:avion,legajo_piloto,precio):
@@ -70,12 +96,7 @@ class vuelo:
         self.legajo_piloto=legajo_piloto
         self.precio=precio
     
-    #nro_vuelo: 4 digitos numericos
-    #hora: que sea una hora
-    #aeropuerto salida/llegada: que sea un string
-    #nro_avion: que sea un objeto de la clase avion
-    #piloto: que el legajo pertenezca a un empleado del sector piloto
-    #precio: int mayor a 0    
+
     
         
 class viaje:
@@ -85,27 +106,30 @@ class viaje:
         self.nro_avion=nro_serie
         self.fecha=fecha
         self.num_pasajeros=[]
-        
-    #nro_vuelo: exista en vuelo
-    #nro_serie: exista en avion
-    #fecha:fecha 
+    
+
+    def eliminarViaje(nro_viaje,matriz_viajes):
+        for i in matriz_viajes:
+            if i[0]==nro_viaje:
+                matriz_viajes.pop(i)
+        return matriz_viajes
+
 
 class reserva:
-    def __init__(self,nro_factura,DNI_cliente:persona,empleado:empleado,nro_viaje:viaje,monto):
-        self.cliente=nro_factura
+    def __init__(self,nro_reserva,DNI_cliente:persona,empleado:empleado,nro_viaje:viaje,monto):
+        self.nro_reserva=nro_reserva
         self.DNI_cliente=DNI_cliente
         self.empleado=empleado
         self.nro_viaje=nro_viaje
         self.monto=monto
-    
     @staticmethod
-    def check_nro_factura(nro_factura):
-        while(nro_factura.isnumeric()!=True or len(nro_factura!=4)):
-            nro_factura=input('Ingrese nuevamente su nro de factura:    ')
-        return nro_factura
+    def check_nro_reserva(nro_reserva):
+        while(nro_reserva.isnumeric()!=True or len(nro_reserva!=4)):
+            nro_reserva=input('Ingrese nuevamente su nro de factura:    ')
+        return nro_reserva
     @staticmethod
-    def check_cliente(DNI_cliente,matriz_cliente):
-        while(DNI_cliente not in matriz_cliente[:][0]):
+    def check_cliente(DNI_cliente,matriz_pasajero):
+        while(DNI_cliente not in matriz_pasajero[:][0]):
             DNI_cliente=input('Ingrese nuevamente su DNI:    ')
         return DNI_cliente
     @staticmethod
@@ -129,11 +153,14 @@ class reserva:
                 while(monto!=i[-1]):
                     monto=input('Monto incorrecto, ingrese nuevamente su monto:    ')
                 return monto
+     
+    def eliminarReserva(nro_reserva,matriz_reserva):
+        for i in matriz_reserva:
+            if i[0]==nro_reserva:
+                matriz_reserva.pop(i)
+        return matriz_reserva
+
+
     
     
-    #nro_factura: nro de 4 digitos
-    #cliente: que exista en la clase persona
-    #empleado: que este en la clase empleado
-    #viaje: que exista en viaje
-    #monto: int que coincida con el precio del vuelo
         
