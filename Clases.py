@@ -4,7 +4,24 @@ class login():
         self.usuario=usuario
         self.contrasenia=contrasenia
     
-    # Que exista el usuario,contrasenia       y que sino la vuelva a pedir
+    
+    
+  #preguntar si hacer una clase de login o no. hicimos este codigo pero no funciona. preguntar lo de append y read
+
+def login (usuario,contrasenia):
+        archivo=open( "Usuarios.txt" ,'a',encoding='utf-8')
+        for linea in archivo:
+            usu,contra=linea.strip().split(".")
+            while usu==usuario and contra!=contrasenia:
+                contrasenia=input(("Ingrese la contraseña nuevamente"))
+            if usu!= usuario:
+                archivo.write(f"\n{usuario}.{contrasenia}")
+                print("Se creó el usuario")
+                return True 
+            if usu==usuario and contra==contrasenia:
+                return True
+        archivo.close()
+
 
 class persona:
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais):
