@@ -6,6 +6,7 @@ nombre: distinto de vacío
 sexo: H o M
 fecha nacimiento: Tiene que ser tipo fecha, menor a día de hoy.
 """
+"""
 def validarNum(tipoDato):
     ingresado = input("Ingrese " + tipoDato + ": ")
     while(ingresado.isnumeric() == False or len(ingresado)!=8):
@@ -16,6 +17,8 @@ def validarNum(tipoDato):
 DNI = validarNum("DNI")
 
 print("Este es:", DNI)
+
+"""
 
 import datetime
 
@@ -32,6 +35,6 @@ def validarNum(tipoDato, min, max):
 
 año = validarNum("año", 1900, 2030)
 mes = validarNum("mes", 1, 12)
-dia = validarNum("dia", 1, 31)
+dia = validarNum("dia", 1, 28)
 
 print(datetime.date(año, mes, dia))
