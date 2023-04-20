@@ -113,9 +113,6 @@ class vuelo:
         self.legajo_piloto=legajo_piloto
         self.precio=precio
     
-<<<<<<< HEAD
-
-=======
     #nro_vuelo: 4 digitos numericos
     #hora: que sea una hora
     #aeropuerto salida/llegada: que sea un string
@@ -139,7 +136,6 @@ class vuelo:
                     if i[-1] == "Piloto":
                         chequear = True
             legajo_piloto = input("Error, no es un piloto")
->>>>>>> 97b19173e40baded00bc1697f98370f4da89bfe9
     
         
 class viaje:
