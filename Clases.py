@@ -70,27 +70,30 @@ class empleado(persona):
     #chequear legajo: que sea un numero y de 4 digitos (y que no hay dos repetidos)
     #chequear sector: que sea un sector preexistente
 
-class avion:
+
+class avion: #Chequeado funciona bien
     def __init__(self,nro_serie,modelo,fecha_alta,nro_vuelos_actuales,estado):
         self.nro_avion=nro_serie
         self.modelo=modelo
         self.fecha_alta=fecha_alta
         self.nro_vuelos_actuales=nro_vuelos_actuales
         self.estado=estado
+        print('Se creo bien')
+
         
     @staticmethod
-    def check_nro_serir(nro_serie):
-        while(nro_serie.isnumeric()!=True or len(nro_serie!=10)):
+    def check_nro_serie(nro_serie):
+        while(len(nro_serie)!=10 or nro_serie.isnumeric() is not True ):
             nro_serie=input('Ingrese nuevamente el nro de serie:    ')
         return nro_serie
     @staticmethod
     def check_nro_vuelos_actuales(nro_vuelos_actuales):    
-        while(nro_vuelos_actuales!=1 and nro_vuelos_actuales!=0):
+        while(nro_vuelos_actuales!='1' and nro_vuelos_actuales!='0'):
             nro_vuelos_actuales=input('Ingrese nuevamente el nro de vuelos actuales:    ')
         return nro_vuelos_actuales
     @staticmethod
     def check_estado(estado):    
-        while(estado is not 'En servicio' and estado is not 'Fuera de servicio'):
+        while(estado not in ['En servicio','Fuera de servicio']):
             estado=input('Ingrese nuevamente el estado del avion:    ')
         return estado
         
@@ -100,6 +103,7 @@ class avion:
             if i[0]==nro_serie:
                 matriz_aviones.pop(i)
         return matriz_aviones
+    
 
 
 
@@ -162,52 +166,63 @@ class viaje:
         while nro_serie not in matriz_avion[:][0]:
             nro_vuelo = input("Error, el avión no existe. Intente de nuevo.")  
 
-class reserva:
-    def __init__(self,nro_reserva,DNI_cliente:persona,empleado:empleado,nro_viaje:viaje,monto):
+
+class reserva:  #Chequeado
+    def __init__(self,nro_reserva,DNI_cliente,legajo_empleado,nro_viaje,monto):
         self.nro_reserva=nro_reserva
         self.DNI_cliente=DNI_cliente
-        self.empleado=empleado
+        self.empleado=legajo_empleado
         self.nro_viaje=nro_viaje
         self.monto=monto
+        print('Se ejecuto bien')
+        
     @staticmethod
     def check_nro_reserva(nro_reserva):
-        while(nro_reserva.isnumeric()!=True or len(nro_reserva!=4)):
+        while(nro_reserva.isnumeric()!=True or len(nro_reserva)!=4):
             nro_reserva=input('Ingrese nuevamente su nro de factura:    ')
         return nro_reserva
+    
     @staticmethod
-    def check_cliente(DNI_cliente,matriz_pasajero):
-        while(DNI_cliente not in matriz_pasajero[:][0]):
-            DNI_cliente=input('Ingrese nuevamente su DNI:    ')
-        return DNI_cliente
+    def check_cliente(DNI_pasajero,lista_pasajero):
+        while(True):
+            for pasajero in lista_pasajero:
+                if pasajero.DNI==DNI_pasajero:
+                    return DNI_pasajero    
+            DNI_pasajero=input('Ingrese nuevamente su DNI:    ')
+    
     @staticmethod
-    def check_empleado(Legajo_empleado,matriz_empleado):
-        while(Legajo_empleado not in matriz_empleado[:][-2]):
-            Legajo_empleado=input('Ingrese nuevamente su Legajo:    ')
-        return Legajo_empleado
+    def check_empleado(legajo_empleado,lista_empleado):
+        while(True):
+            for empleado in lista_empleado:
+                if empleado.legajo==legajo_empleado:
+                    return legajo_empleado
+            legajo_empleado=input('Ingrese nuevamente su Legajo:    ')
+            
     @staticmethod
-    def check_viaje(nro_viaje,matriz_viaje):
-        while(nro_viaje not in matriz_viaje[:][0]):
+    def check_viaje(nro_viaje,lista_viaje):
+        while(True):
+            for viaje in lista_viaje:
+                if viaje.nro_viaje==nro_viaje:
+                    return nro_viaje
             nro_viaje=input('Ingrese nuevamente el nro de viaje:    ')        
         return nro_viaje
-    @staticmethod
-    def check_monto(monto,viaje,matriz_viaje,matriz_vuelo):
-        nro_vuelo=0
-        for i in matriz_viaje:
-            if i[0]==viaje:
-                i[1]=nro_vuelo
-        for i in matriz_vuelo:
-            if i[0]==nro_vuelo:
-                while(monto!=i[-1]):
-                    monto=input('Monto incorrecto, ingrese nuevamente su monto:    ')
-                return monto
-     
-    def eliminarReserva(nro_reserva,matriz_reserva):
-        for i in matriz_reserva:
-            if i[0]==nro_reserva:
-                matriz_reserva.pop(i)
-        return matriz_reserva
-
-
     
+    @staticmethod
+    def check_monto(monto,nro_viaje,lista_viaje,lista_vuelo):
+        for viaje in lista_viaje:
+            if viaje.nro_viaje==nro_viaje:
+                for vuelo in lista_vuelo:
+                    if viaje.nro_vuelo==vuelo.nro_vuelo:
+                        while(True):
+                            if vuelo.monto==monto:
+                                return monto
+                            else:
+                                monto=input('Monto incorrecto, ingrese nuevamente su monto:    ')
+
+    def eliminarReserva(nro_reserva,lista_reserva):
+        for reserva in lista_reserva:
+            if reserva.nro_reserva==nro_reserva:
+                lista_reserva.pop(reserva)
+                print('Se ha eliminado la reserva nro {}'.format(reserva.nro_reserva))
     
         
