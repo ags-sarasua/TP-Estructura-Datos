@@ -34,5 +34,6 @@ p2 = checks_persona_empleado.empleado(43917641, "Balonso", "Masculino", datetime
 
 listaEmpleados = [p1, p2]
 
-checks_persona_empleado.empleado.checklegajo(p2.legajo, listaEmpleados)
-print(p2.legajo)
+nuevo = checks_persona_empleado.empleado.checklegajo(p2.legajo, listaEmpleados)
+
+print(nuevo)
