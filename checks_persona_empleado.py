@@ -82,15 +82,18 @@ class empleado(persona):
                 print('El legajo ingresado ya existe')
                 legajo=input("Ingrese el legajo nuevamente:")
                 legajo = empleado.checklegajo(legajo, lista_empleado)
+                return legajo
             elif legajo.isnumeric()==False:
                 print('El legajo debe ser un número')
                 legajo=input("Ingrese el legajo nuevamente:")
                 legajo = empleado.checklegajo(legajo, lista_empleado)
+                return legajo
             elif(len(legajo) is not 4):
                 print('El legajo debe tener 4 caracteres')
                 legajo=input("Ingrese el legajo nuevamente:")
-                legajo = empleado.checklegajo(legajo, lista_empleado)            
-        return legajo
+                legajo = empleado.checklegajo(legajo, lista_empleado)
+                return legajo            
+        
                              
     #chequear sector: que sea un sector preexistente
     @staticmethod
