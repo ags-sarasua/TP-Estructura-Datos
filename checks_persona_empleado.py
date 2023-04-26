@@ -62,8 +62,11 @@ class persona:
     #chequear pais: string y que pertenezca a un pais real
     @staticmethod
     def check_pais(pais):
-        listapaises=("Argentina")
-        while pais not in listapaises:
+        archivo = open('Paises.txt', 'r')
+        paises = archivo.read()
+        archivo.close()
+
+        while pais not in paises:
            print('El pais ingresado no es valido')
            pais=input("Ingrese el pais nuevamente:") 
         return pais 
@@ -77,22 +80,27 @@ class empleado(persona):
     #chequear legajo: que sea un numero y de 4 digitos (y que no hay dos repetidos)
     @staticmethod
     def checklegajo(legajo, lista_empleado):
-        for empleado in lista_empleado:
-            if(empleado.legajo == legajo):
-                print('El legajo ingresado ya existe')
-                legajo=input("Ingrese el legajo nuevamente:")
-                legajo = empleado.checklegajo(legajo, lista_empleado)
-                return legajo
-            elif legajo.isnumeric()==False:
+
+        if legajo.isnumeric()==False:
                 print('El legajo debe ser un número')
                 legajo=input("Ingrese el legajo nuevamente:")
-                legajo = empleado.checklegajo(legajo, lista_empleado)
-                return legajo
-            elif(len(legajo) is not 4):
-                print('El legajo debe tener 4 caracteres')
-                legajo=input("Ingrese el legajo nuevamente:")
-                legajo = empleado.checklegajo(legajo, lista_empleado)
-                return legajo            
+                legajo=empleado.checklegajo(legajo, lista_empleado)
+                
+        elif(len(legajo) != 4):
+            print('El legajo debe tener 4 caracteres')
+            legajo=input("Ingrese el legajo nuevamente:")
+            legajo = empleado.checklegajo(legajo, lista_empleado)
+
+        else:        
+            for empleado in lista_empleado:
+                if(empleado.legajo == legajo):
+                    print('El legajo ingresado ya existe')
+                    legajo=input("Ingrese el legajo nuevamente:")
+                    legajo = empleado.checklegajo(legajo, lista_empleado)
+                    break
+                    
+        return legajo
+                    
         
                              
     #chequear sector: que sea un sector preexistente

@@ -29,10 +29,10 @@ pais = p1.check_pais(p1.pais)
 p1.pais = pais
 print(p1.pais)"""
 
-p1 = checks_persona_empleado.empleado(43917641, "Balonso", "Masculino", datetime.date(2030, 3, 2), "Argentina", "6354","Tecnico")
+p1 = checks_persona_empleado.empleado(43917641, "Balonso", "Masculino", datetime.date(2030, 3, 2), "Argentino", "8473","Tecnico")
 p2 = checks_persona_empleado.empleado(43917641, "Balonso", "Masculino", datetime.date(2030, 3, 2), "Argentina", "8473","Piloto")
 
 listaEmpleados = [p1, p2]
 
-checks_persona_empleado.empleado.checksector(p1.sector)
-print(p1.sector)
+checks_persona_empleado.empleado.checklegajo(p2.legajo, listaEmpleados)
+print(p2.legajo)
